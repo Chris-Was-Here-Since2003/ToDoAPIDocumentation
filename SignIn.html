@@ -33,7 +33,8 @@
                 data : JSON.stringify(Send),
                 success : function(response_data) {
                     console.log(JSON.stringify(Send));
-                    alert("Status: " + JSON.parse(response_data).status);
+                    var mess = JSON.parse(response_data);
+                    alert("Status: " + mess.status +" \n" + mess.message +" \nWelcome " +mess.data.fname +" "+mess.data.lname);
                 },
                 error : function(res_data){
                     console.log(JSON.stringify(Send));
