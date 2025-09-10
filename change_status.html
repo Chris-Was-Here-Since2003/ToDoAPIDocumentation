@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--
+NOTE: saw online that PUT and DELETE methods might not be supported.
+      Change must apparaenlty come from the servers.
+      So nothing we could really do about it :/
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +14,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+  <a href="index.html">Back to Home</a><br><br>
   <center>
+    <div class="main">
+        <div class="child">
     <h1>Change To Do Task Status</h1>
 
     <label for="item_id">Task ID:</label>
@@ -23,8 +31,16 @@
 
     <button type="button" onclick="changeStatus()">Update Status</button>
   </center>
-
+  </div>
+  </div>
   <script>
+     $(document).ready(function() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) {
+                alert("You are not logged in. Redirecting to Sign In page.");
+                window.location.href = "SignIn.html";
+            }
+        });
     function changeStatus() {
       const taskId = $("#item_id").val();
       const newStatus = $("#status").val();

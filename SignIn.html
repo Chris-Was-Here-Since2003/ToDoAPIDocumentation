@@ -38,7 +38,8 @@
                 success : function(response_data) {
                     console.log(JSON.stringify(Send));
                     var mess = JSON.parse(response_data);
-                    alert("Status: " + mess.status +" \n" + mess.message +" \nWelcome " +mess.data.fname +" "+mess.data.lname);
+                    alert("Welcome " + mess.data.fname + " " + mess.data.lname);
+                    sessionStorage.setItem("user_id", mess.data.user_id);
                     window.location.href = "index.html";
                 },
                 error : function(res_data){

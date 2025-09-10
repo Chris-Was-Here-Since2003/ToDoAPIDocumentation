@@ -8,6 +8,7 @@
     <title>GET TO DO TASK</title>
 </head>
 <body>
+    <a href="index.html">Back to Home</a><br><br>
     <center>
     <div class="main">
     <div class="child">
@@ -19,9 +20,6 @@
             <option value="inactive">Inactive</option>
         </select>
 
-        <label for="user_id">User ID:</label>
-        <input type="number" id="user_id" name="user_id" required placeholder="Enter your user ID">
-
         <button type="submit">Get Tasks</button>
     </form>
 
@@ -31,12 +29,20 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+         $(document).ready(function() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) {
+                alert("You are not logged in. Redirecting to Sign In page.");
+                window.location.href = "SignIn.html";
+            }
+        });
+
         $(document).ready(function(){
             $("#getTaskForm").submit(function(event){
                 event.preventDefault();
 
                 var status = $("#status").val();
-                var user_id = $("#user_id").val();
+                var user_id = sessionStorage.getItem("user_id");
 
                 $.ajax({
                     type: "GET",
@@ -45,7 +51,23 @@
                     dataType: "json",
                     success: function(response){
                         console.log("Raw response:", response);
-                        $("#responseBox").text(JSON.stringify(response, null, 2));
+                        if (response.status === 200 && response.data && Object.keys(response.data).length > 0) {
+                            let table = '<table border="1" style="width:100%;border-collapse:collapse;"><tr><th>Item ID</th><th>Name</th><th>Description</th><th>Status</th><th>User ID</th><th>Time Modified</th></tr>';
+                            $.each(response.data, function(index, item) {
+                                table += `<tr>
+                                    <td>${item.item_id}</td>
+                                    <td>${item.item_name}</td>
+                                    <td>${item.item_description}</td>
+                                    <td>${item.status}</td>
+                                    <td>${item.user_id}</td>
+                                    <td>${item.timemodified}</td>
+                                </tr>`;
+                            });
+                            table += '</table>';
+                            $("#responseBox").html(table);
+                        } else {
+                            $("#responseBox").text("No tasks found.");
+                        }
                     },
                     error: function(xhr, status, error){
                         console.error("Error:", xhr.responseText);

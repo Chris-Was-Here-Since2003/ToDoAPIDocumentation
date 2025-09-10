@@ -9,16 +9,29 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+  <a href="index.html">Back to Home</a><br><br>
+  
   <center>
+    <div class="main">
+        <div class="child">
     <h1>Delete To Do Task</h1>
 
     <label for="item_id">Task ID:</label>
     <input type="number" id="item_id" placeholder="Enter task ID" required>
 
     <button type="button" onclick="deleteTask()">Delete Task</button>
+    </div>
+  </div>
   </center>
 
   <script>
+     $(document).ready(function() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) {
+                alert("You are not logged in. Redirecting to Sign In page.");
+                window.location.href = "SignIn.html";
+            }
+        });
     function deleteTask() {
       const taskId = $("#item_id").val();
 

@@ -7,12 +7,26 @@
 </head>
 <body>
     <center>
+        <div class="main">
+        <div class="child">
         <h1>ToDo List Application</h1>
-        <a href="SignIn.html">Sign In</a><br><br>
-        <a href="SignUp.html">Sign Up</a><br><br>
         <a href="delete.html">Delete Task</a><br><br>
         <a href="addTask.html">Add Task</a><br><br>
-        <a href="get_to_do.html">Get To Do List</a><br>
-        <a href="change_status.html">Change Task Status</a>
+        <a href="get_to_do.html">Get To Do List</a><br><br>
+        <a href="change_status.html">Change Task Status</a><br><br>
+        </div>
+        </div><br>
+        <button onclick="sessionStorage.clear(); alert('Logged out successfully!'); location.reload();">Logout</button> 
     </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const userId = sessionStorage.getItem("user_id");
+            if (!userId) {
+                alert("You are not logged in. Redirecting to Sign In page.");
+                window.location.href = "SignIn.html";
+            }
+        });
+        </script>
+</body>
 </html>
