@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Change Task Status</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <center>
+    <h1>Change To Do Task Status</h1>
+
+    <label for="item_id">Task ID:</label>
+    <input type="number" id="item_id" placeholder="Enter task ID" required>
+
+    <label for="status">New Status:</label>
+    <select id="status">
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+    </select>
+
+    <button type="button" onclick="changeStatus()">Update Status</button>
+  </center>
+
+  <script>
+    function changeStatus() {
+      const taskId = $("#item_id").val();
+      const newStatus = $("#status").val();
+
+      if (!taskId) {
+        alert("Please enter a task ID.");
+        return;
+      }
+
+      $.ajax({
+        url: "https://todo-list.dcism.org/statusItem_action.php",
+        method: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({
+          status: newStatus,
+          item_id: taskId
+        }),
+        success: function(response) {
+          alert("Status: " + response.status + " | " + response.message);
+        },
+        error: function(xhr) {
+          alert("Error: " + xhr.status + " " + xhr.statusText);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

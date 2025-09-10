@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delete Task</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+  <center>
+    <h1>Delete To Do Task</h1>
+
+    <label for="item_id">Task ID:</label>
+    <input type="number" id="item_id" placeholder="Enter task ID" required>
+
+    <button type="button" onclick="deleteTask()">Delete Task</button>
+  </center>
+
+  <script>
+    function deleteTask() {
+      const taskId = $("#item_id").val();
+
+      if (!taskId) {
+        alert("Please enter a task ID.");
+        return;
+      }
+
+      $.ajax({
+        url: `https://todo-list.dcism.org/deleteItem_action.php?item_id=${taskId}`,
+        method: "DELETE",
+        success: function(response) {
+          alert("Status: " + response.status + " | " + response.message);
+        },
+        error: function(xhr) {
+          alert("Error: " + xhr.status + " " + xhr.statusText);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
