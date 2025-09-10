@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
     <center>
-        <div>
-            <h1>Sign in</h1>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="password">
+        <div class="main">
+        <div class="child">
+            <h1>Sign in</h1><br>
+                <input type="email" placeholder="Email"><br><br>
+                <input type="password" placeholder="password"><br>
                 <button type ="button" onclick="Send()">Confirm</button>
-        </div>
+                </div>
+        </div><br>
+        <a href="SignUp.html">Don't have an account? Sign Up</a>
     </center>
     
 </form>
@@ -35,6 +39,7 @@
                     console.log(JSON.stringify(Send));
                     var mess = JSON.parse(response_data);
                     alert("Status: " + mess.status +" \n" + mess.message +" \nWelcome " +mess.data.fname +" "+mess.data.lname);
+                    window.location.href = "index.html";
                 },
                 error : function(res_data){
                     console.log(JSON.stringify(Send));

@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+
     <title>GET TO DO TASK</title>
 </head>
 <body>
+    <center>
+    <div class="main">
+    <div class="child">
     <h1>Get To-Do Task</h1>
     <form id="getTaskForm">
         <label for="status">Task Status:</label>
@@ -22,7 +27,8 @@
 
     <h2 style="text-align:center;">Response:</h2>
     <pre id="responseBox">No request made yet.</pre>
-    
+    </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -49,5 +55,6 @@
             });
         });
     </script>
+    </center>
 </body>
 </html>
